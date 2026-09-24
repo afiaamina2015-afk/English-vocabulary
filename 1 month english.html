@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Vocabulary Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    color:#fff;
+    background:
+        radial-gradient(circle at 10% 20%,rgba(0,255,255,.12),transparent 30%),
+        radial-gradient(circle at 90% 80%,rgba(138,43,226,.15),transparent 30%),
+        linear-gradient(135deg,#050816,#0b1025,#050816);
+    overflow-x:hidden;
+}
+
+/* Background */
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    border-radius:50%;
+    filter:blur(80px);
+    z-index:-1;
+}
+
+body::before{
+    width:250px;
+    height:250px;
+    background:#00eaff;
+    opacity:.08;
+    top:5%;
+    left:-80px;
+}
+
+body::after{
+    width:300px;
+    height:300px;
+    background:#8b2cff;
+    opacity:.09;
+    bottom:-100px;
+    right:-80px;
+}
+
+/* Main */
+.container{
+    width:min(1200px,94%);
+    margin:auto;
+    padding:45px 0;
+}
+
+
+.guideline-btn {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 11px 16px;
+
+    border: 1px solid rgba(0, 220, 255, 0.45);
+    border-radius: 12px;
+
+    background: rgba(20, 35, 65, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25),
+        inset 0 0 15px rgba(0, 200, 255, 0.06);
+
+    transition: all 0.3s ease;
+}
+
+.guideline-btn:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(0, 230, 255, 0.9);
+
+    background: linear-gradient(
+        135deg,
+        rgba(0, 170, 230, 0.9),
+        rgba(90, 70, 220, 0.9)
+    );
+
+    box-shadow:
+        0 10px 30px rgba(0, 190, 255, 0.25),
+        0 0 18px rgba(0, 210, 255, 0.18);
+}
+
+.guideline-btn:active {
+    transform: scale(0.97);
+}
+.global-back-btn:hover {
+    background: rgba(0,234,255,0.2);
+    border-color: #00eaff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,234,255,0.15);
+}
+
+/* Header */
+.header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.header .small-title{
+    color:#00eaff;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:4px;
+    margin-bottom:8px;
+}
+
+.header h1{
+    font-size:clamp(30px,5vw,52px);
+    font-weight:800;
+    background:linear-gradient(90deg,#fff,#00eaff,#b66cff,#fff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.header p{
+    color:#aeb8d0;
+    margin-top:8px;
+    font-size:15px;
+}
+
+/* Glass box */
+.glass{
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.11);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-radius:24px;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* Days */
+.days-box{
+    padding:28px;
+}
+
+.section-title{
+    text-align:center;
+    font-size:22px;
+    margin-bottom:24px;
+}
+
+.section-title span{
+    color:#00eaff;
+}
+
+.days-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
+}
+
+/* Day Card Style */
+.day-card{
+    position: relative;
+    border:1px solid rgba(0,234,255,.2);
+    background:rgba(255,255,255,.045);
+    border-radius:15px;
+    padding:14px 10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    transition:.25s;
+    overflow: hidden;
+}
+
+.day-card:hover{
+    transform:translateY(-4px);
+    border-color:#00eaff;
+    background:rgba(0,234,255,.1);
+    box-shadow:0 8px 25px rgba(0,234,255,.12);
+}
+
+.day-btn{
+    border:none;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:600;
+    width: 100%;
+}
+
+/* Bottom Tick Section */
+.card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 8px;
+}
+
+.tick-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tick-btn:hover {
+    background: #00bcd4;
+    border-color: #00bcd4;
+}
+
+/* Completed Card State - পুরো বক্সের ওপর DONE ইফেক্ট */
+.day-card.completed {
+    border-color: #00ffcc;
+    background: rgba(0, 255, 204, 0.12);
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+}
+
+/* পুরো বক্সের ওপর বড় করে DONE জলছাপ বা ওভারলে */
+.day-card.completed::before {
+    content: "DONE";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-size: 28px;
+    font-weight: 900;
+    color: rgba(0, 255, 204, 0.22);
+    letter-spacing: 3px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.day-card.completed .tick-btn {
+    background: #00ffcc;
+    border-color: #00ffcc;
+    color: #050816;
+    font-weight: 700;
+}
+
+
+/* Vocabulary page */
+.vocab-page{
+    display:none;
+}
+
+.vocab-header{
+    padding:22px 25px;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.vocab-title{
+    font-size:25px;
+    font-weight:800;
+}
+
+.vocab-title span{
+    color:#00eaff;
+}
+
+.back-btn{
+    border:none;
+    background:linear-gradient(135deg,#00bcd4,#7c3aed);
+    color:#fff;
+    padding:11px 20px;
+    border-radius:12px;
+    font-family:inherit;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.back-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(0,234,255,.18);
+}
+
+/* Table */
+.table-box{
+    padding:10px;
+    overflow:hidden;
+}
+
+.table-scroll{
+    overflow-x:auto;
+    border-radius:18px;
+}
+
+table{
+    width:100%;
+    min-width:1000px;
+    border-collapse:collapse;
+}
+
+thead{
+    background:linear-gradient(
+        90deg,
+        rgba(0,234,255,.18),
+        rgba(124,58,237,.18)
+    );
+}
+
+th{
+    padding:17px 14px;
+    text-align:left;
+    color:#00eaff;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+td{
+    padding:16px 14px;
+    border-top:1px solid rgba(255,255,255,.07);
+    color:#e7ebf7;
+    font-size:14px;
+    vertical-align:top;
+}
+
+tbody tr{
+    transition:.2s;
+}
+
+tbody tr:hover{
+    background:rgba(255,255,255,.045);
+}
+
+.number{
+    color:#7ddff0;
+    font-weight:700;
+    width:55px;
+}
+
+.word{
+    color:#fff;
+    font-weight:700;
+    font-size:15px;
+}
+
+.meaning{
+    color:#9eeeff;
+}
+
+.pronunciation{
+    color:#d2b7ff;
+}
+
+.example{
+    color:#f2f4fa;
+    line-height:1.6;
+}
+
+.example-bn{
+    color:#aeb8d0;
+    line-height:1.6;
+}
+
+/* Empty */
+.empty{
+    text-align:center;
+    padding:60px 20px;
+    color:#aeb8d0;
+}
+
+.empty h2{
+    color:#fff;
+    margin-bottom:10px;
+}
+
+/* Footer */
+.footer{
+    text-align:center;
+    margin-top:30px;
+    color:#69738c;
+    font-size:12px;
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .days-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .container{
+        padding:25px 0;
+    }
+
+    .days-box{
+        padding:18px;
+    }
+
+    .days-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .day-card{
+        padding:10px 7px;
+    }
+
+    .day-btn{
+        font-size:13px;
+    }
+
+    .vocab-header{
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
+    }
+
+    .vocab-title{
+        font-size:21px;
+    }
+
+    .back-btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<button class="guideline-btn" onclick="openGuideline()">
+    📘 Vocabulary Guideline
+</button>
+
+    <!-- HOME -->
+    <div id="homePage">
+
+        <div class="header">
+            <div class="small-title">ENGLISH VOCABULARY</div>
+            <h1>VOCABULARY PORTAL</h1>
+            <p>৩০ দিনের Vocabulary Practice</p>
+        </div>
+
+        <div class="glass days-box">
+
+            <div class="section-title">
+                <span>SELECT</span> YOUR DAY
+            </div>
+
+            <div class="days-grid" id="daysGridContainer">
+                <!-- Javascript দিয়ে জেনারেট হবে -->
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- VOCABULARY PAGE -->
+    <div id="vocabPage" class="vocab-page">
+
+        <div class="glass vocab-header">
+
+            <div class="vocab-title">
+                <span id="dayNumber">Day 1</span> Vocabulary
+            </div>
+
+
+        <div class="glass table-box">
+
+            <div class="table-scroll">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Word</th>
+                            <th>বাংলা অর্থ</th>
+                            <th>উচ্চারণ</th>
+                            <th>English Example</th>
+                            <th>Example-এর বাংলা</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="vocabBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        Premium Vocabulary Portal • Day 1–30
+    </div>
+
+</div>
+
+
+<script>
+
+const vocabulary = {
+1: [
+["I","আমি","আই","I am a student.","আমি একজন শিক্ষার্থী।"],
+["You","তুমি/আপনি","ইউ","You are very kind.","তুমি খুব দয়ালু।"],
+["He","সে (ছেলে)","হি","He is my brother.","সে আমার ভাই।"],
+["She","সে (মেয়ে)","শি","She is a good student.","সে একজন ভালো শিক্ষার্থী।"],
+["We","আমরা","উই","We are ready for the exam.","আমরা পরীক্ষার জন্য প্রস্তুত।"],
+["They","তারা","They are playing football.","তারা ফুটবল খেলছে।"],
+["Good","ভালো","গুড","He is a good boy.","সে একজন ভালো ছেলে।"],
+["Bad","খারাপ","ব্যাড","Smoking is a bad habit.","ধূমপান একটি খারাপ অভ্যাস।"],
+["Big","বড়","বিগ","Dhaka is a big city.","ঢাকা একটি বড় শহর।"],
+["Small","ছোট","স্মল","I have a small bag.","আমার একটি ছোট ব্যাগ আছে।"],
+["Happy","সুখী","হ্যাপি","I am happy today.","আমি আজ সুখী।"],
+["Sad","দুঃখিত","স্যাড","She looks sad.","তাকে দুঃখিত দেখাচ্ছে।"],
+["Hot","গরম","হট","The tea is hot.","চা গরম।"],
+["Cold","ঠান্ডা","কোল্ড","The water is cold.","পানি ঠান্ডা।"],
+["New","নতুন","নিউ","I bought a new book.","আমি একটি নতুন বই কিনেছি।"],
+["Old","পুরোনো","ওল্ড","This is an old house.","এটি একটি পুরোনো বাড়ি।"],
+["Day","দিন","ডে","It is a beautiful day.","এটি একটি সুন্দর দিন।"],
+["Night","রাত","নাইট","The sky is beautiful at night.","রাতে আকাশ সুন্দর।"],
+["Today","আজ","টুডে","I will study today.","আমি আজ পড়াশোনা করব।"],
+["Tomorrow","আগামীকাল","টুমরো","We have an exam tomorrow.","আমাদের আগামীকাল পরীক্ষা।"]
+],
+2: [
+["Ability","সক্ষমতা","অ্যাবিলিটি","He has the ability to learn quickly.","তার দ্রুত শেখার সক্ষমতা আছে।"],
+["Accept","গ্রহণ করা","অ্যাকসেপ্ট","Please accept my apology.","দয়া করে আমার ক্ষমা প্রার্থনা গ্রহণ করুন।"],
+["Achieve","অর্জন করা","অ্যাচিভ","She achieved her goal.","সে তার লক্ষ্য অর্জন করেছে।"],
+["Active","সক্রিয়","অ্যাক্টিভ","He is active in class.","সে ক্লাসে সক্রিয়।"],
+["Advice","পরামর্শ","অ্যাডভাইস","My teacher gave me good advice.","আমার শিক্ষক আমাকে ভালো পরামর্শ দিয়েছেন।"],
+["Agree","একমত হওয়া","অ্যাগ্রি","I agree with you.","আমি তোমার সঙ্গে একমত।"],
+["Allow","অনুমতি দেওয়া","অ্যালাও","My father allowed me to go.","আমার বাবা আমাকে যেতে অনুমতি দিয়েছেন।"],
+["Answer","উত্তর","আনসার","I know the answer.","আমি উত্তরটি জানি।"],
+["Appear","দেখা দেওয়া","অ্যাপিয়ার","The moon appeared in the sky.","আকাশে চাঁদ দেখা দিল।"],
+["Apply","আবেদন/প্রয়োগ করা","অ্যাপ্লাই","I will apply for the job.","আমি চাকরির জন্য আবেদন করব।"],
+["Arrive","পৌঁছানো","অ্যারাইভ","We arrived at school early.","আমরা স্কুলে তাড়াতাড়ি পৌঁছেছি।"],
+["Avoid","এড়িয়ে চলা","অ্যাভয়েড","Avoid bad company.","খারাপ সঙ্গ এড়িয়ে চলো।"],
+["Believe","বিশ্বাস করা","বিলিভ","I believe you.","আমি তোমাকে বিশ্বাস করি।"],
+["Borrow","ধার নেওয়া","বরো","Can I borrow your pen?","আমি কি তোমার কলম ধার নিতে পারি?"],
+["Brave","সাহসী","ব্রেভ","The brave boy helped the child.","সাহসী ছেলেটি শিশুটিকে সাহায্য করেছিল।"],
+["Build","নির্মাণ করা","বিল্ড","They build a new house.","তারা একটি নতুন বাড়ি নির্মাণ করে।"],
+["Care","যত্ন নেওয়া","কেয়ার","Take care of your health.","তোমার স্বাস্থ্যের যত্ন নাও।"],
+["Change","পরিবর্তন করা","চেঞ্জ","I want to change my plan.","আমি আমার পরিকল্পনা পরিবর্তন করতে চাই।"],
+["Choose","বেছে নেওয়া","চুজ","Choose the best answer.","সেরা উত্তরটি বেছে নাও।"],
+["Collect","সংগ্রহ করা","কালেক্ট","I collect old coins.","আমি পুরোনো মুদ্রা সংগ্রহ করি।"]
+],
+3: [
+["Common","সাধারণ","কমন","This is a common problem.","এটি একটি সাধারণ সমস্যা।"],
+["Complete","সম্পূর্ণ করা","কমপ্লিট","Please complete your homework.","দয়া করে তোমার বাড়ির কাজ সম্পূর্ণ করো।"],
+["Continue","চালিয়ে যাওয়া","কন্টিনিউ","Continue your study.","তোমার পড়াশোনা চালিয়ে যাও।"],
+["Create","সৃষ্টি করা","ক্রিয়েট","We can create a new plan.","আমরা একটি নতুন পরিকল্পনা তৈরি করতে পারি।"],
+["Decide","সিদ্ধান্ত নেওয়া","ডিসাইড","I decided to study hard.","আমি কঠোরভাবে পড়াশোনা করার সিদ্ধান্ত নিয়েছি।"],
+["Describe","বর্ণনা করা","ডিসক্রাইব","Describe the picture.","ছবিটি বর্ণনা করো।"],
+["Develop","উন্নত করা","ডেভেলপ","We should develop our skills.","আমাদের দক্ষতা উন্নত করা উচিত।"],
+["Different","ভিন্ন","ডিফারেন্ট","We have different ideas.","আমাদের ভিন্ন ভিন্ন ধারণা আছে।"],
+["Difficult","কঠিন","ডিফিকাল্ট","This question is difficult.","এই প্রশ্নটি কঠিন।"],
+["Discover","আবিষ্কার করা","ডিসকাভার","Scientists discover new things.","বিজ্ঞানীরা নতুন জিনিস আবিষ্কার করেন।"],
+["Discuss","আলোচনা করা","ডিসকাস","We discussed the problem.","আমরা সমস্যাটি নিয়ে আলোচনা করেছি।"],
+["Educate","শিক্ষিত করা","এডুকেট","Education educates people.","শিক্ষা মানুষকে শিক্ষিত করে।"],
+["Effort","চেষ্টা","এফোর্ট","Your effort will bring success.","তোমার চেষ্টা সাফল্য আনবে।"],
+["Enough","যথেষ্ট","এনাফ","I have enough money.","আমার যথেষ্ট টাকা আছে।"],
+["Enjoy","উপভোগ করা","এনজয়","I enjoy reading books.","আমি বই পড়া উপভোগ করি।"],
+["Explain","ব্যাখ্যা করা","এক্সপ্লেইন","Please explain the lesson.","দয়া করে পাঠটি ব্যাখ্যা করো।"],
+["Famous","বিখ্যাত","ফেমাস","He is a famous writer.","তিনি একজন বিখ্যাত লেখক।"],
+["Follow","অনুসরণ করা","ফলো","Follow the rules.","নিয়মগুলো অনুসরণ করো।"],
+["Forget","ভুলে যাওয়া","ফরগেট","Do not forget your homework.","তোমার বাড়ির কাজ ভুলে যেও না।"],
+["Improve","উন্নতি করা","ইমপ্রুভ","Practice will improve your English.","অনুশীলন তোমার ইংরেজির উন্নতি করবে।"]
+],
+4: [
+["Important","গুরুত্বপূর্ণ","ইমপোর্ট্যান্ট","Education is important for everyone.","সবার জন্য শিক্ষা গুরুত্বপূর্ণ।"],
+["Include","অন্তর্ভুক্ত করা","ইনক্লুড","The price includes food.","দামের মধ্যে খাবার অন্তর্ভুক্ত।"],
+["Increase","বৃদ্ধি করা","ইনক্রিজ","Exercise can increase strength.","ব্যায়াম শক্তি বৃদ্ধি করতে পারে।"],
+["Introduce","পরিচয় করানো","ইন্ট্রোডিউস","Let me introduce my friend.","আমি আমার বন্ধুর সঙ্গে পরিচয় করিয়ে দিই।"],
+["Invite","আমন্ত্রণ জানানো","ইনভাইট","I invited my friends.","আমি আমার বন্ধুদের আমন্ত্রণ জানিয়েছি।"],
+["Join","যোগ দেওয়া","জয়েন","I want to join the club.","আমি ক্লাবে যোগ দিতে চাই।"],
+["Knowledge","জ্ঞান","নলেজ","Knowledge is power.","জ্ঞানই শক্তি।"],
+["Learn","শেখা","লার্ন","I learn English every day.","আমি প্রতিদিন ইংরেজি শিখি।"],
+["Listen","শোনা","লিসেন","Listen to your teacher.","তোমার শিক্ষকের কথা শোনো।"],
+["Manage","পরিচালনা করা","ম্যানেজ","He manages the business.","সে ব্যবসাটি পরিচালনা করে।"],
+["Mention","উল্লেখ করা","মেনশন","He mentioned my name.","সে আমার নাম উল্লেখ করেছে।"],
+["Notice","লক্ষ্য করা","নোটিস","I noticed a mistake.","আমি একটি ভুল লক্ষ্য করেছি।"],
+["Offer","প্রস্তাব দেওয়া","অফার","He offered me some help.","সে আমাকে কিছু সাহায্যের প্রস্তাব দিয়েছে।"],
+["Prepare","প্রস্তুত করা","প্রিপেয়ার","Prepare for the exam.","পরীক্ষার জন্য প্রস্তুত হও।"],
+["Protect","রক্ষা করা","প্রোটেক্ট","Trees protect the environment.","গাছ পরিবেশকে রক্ষা করে।"],
+["Provide","প্রদান করা","প্রোভাইড","The school provides books.","স্কুল বই প্রদান করে।"],
+["Receive","গ্রহণ করা","রিসিভ","I received a letter.","আমি একটি চিঠি পেয়েছি।"],
+["Remember","মনে রাখা","রিমেম্বার","Remember my advice.","আমার পরামর্শ মনে রেখো।"],
+["Repeat","পুনরাবৃত্তি করা","রিপিট","Please repeat the sentence.","দয়া করে বাক্যটি পুনরাবৃত্তি করো।"],
+["Respect","সম্মান করা","রেসপেক্ট","We should respect our parents.","আমাদের বাবা-মাকে সম্মান করা উচিত।"]
+],
+5: [
+["Save","সঞ্চয়/রক্ষা করা","সেভ","Save some money for the future.","ভবিষ্যতের জন্য কিছু টাকা সঞ্চয় করো।"],
+["Share","ভাগ করা","শেয়ার","Share your food with others.","অন্যদের সঙ্গে তোমার খাবার ভাগ করো।"],
+["Simple","সহজ","সিম্পল","This is a simple question.","এটি একটি সহজ প্রশ্ন।"],
+["Solve","সমাধান করা","সলভ","Can you solve this problem?","তুমি কি এই সমস্যাটি সমাধান করতে পারবে?"],
+["Special","বিশেষ","স্পেশাল","Today is a special day.","আজ একটি বিশেষ দিন।"],
+["Spend","ব্যয় করা","স্পেন্ড","Do not spend too much money.","অতিরিক্ত টাকা ব্যয় করো না।"],
+["Support","সমর্থন করা","সাপোর্ট","My family supports me.","আমার পরিবার আমাকে সমর্থন করে।"],
+["Suggest","পরামর্শ দেওয়া","সাজেস্ট","I suggest a better idea.","আমি একটি ভালো ধারণার পরামর্শ দিই।"],
+["Teach","শেখানো","টিচ","Teachers teach us many things.","শিক্ষকেরা আমাদের অনেক কিছু শেখান।"],
+["Understand","বোঝা","আন্ডারস্ট্যান্ড","I understand the lesson.","আমি পাঠটি বুঝতে পারি।"],
+["Useful","উপকারী","ইউসফুল","This book is very useful.","এই বইটি খুব উপকারী।"],
+["Visit","পরিদর্শন করা","ভিজিট","We visited the museum.","আমরা জাদুঘর পরিদর্শন করেছি।"],
+["Wonder","বিস্মিত হওয়া","ওয়ান্ডার","I wonder why he is late.","সে কেন দেরি করেছে তা ভেবে আমি বিস্মিত হই।"],
+["Worry","চিন্তা করা","ওয়ারি","Do not worry about me.","আমাকে নিয়ে চিন্তা করো না।"],
+["Young","তরুণ","ইয়াং","He is a young man.","সে একজন তরুণ মানুষ।"],
+["Basic","মৌলিক","বেসিক","Learn the basic rules first.","প্রথমে মৌলিক নিয়মগুলো শেখো।"],
+["Careful","সতর্ক","কেয়ারফুল","Be careful on the road.","রাস্তায় সতর্ক থাকো।"],
+["Daily","দৈনিক","ডেইলি","I read the newspaper daily.","আমি প্রতিদিন সংবাদপত্র পড়ি।"],
+["Early","তাড়াতাড়ি","আর্লি","I wake up early.","আমি তাড়াতাড়ি ঘুম থেকে উঠি।"],
+["Ready","প্রস্তুত","রেডি","I am ready for the test.","আমি পরীক্ষার জন্য প্রস্তুত।"]
+],
+6: [
+["Easy","সহজ","ইজি","English is easy to learn.","ইংরেজি শেখা সহজ।"],
+["Healthy","স্বাস্থ্যকর","হেলদি","Fresh food is healthy.","তাজা খাবার স্বাস্থ্যকর।"],
+["Honest","সৎ","অনেস্ট","He is an honest man.","সে একজন সৎ মানুষ।"],
+["Kind","দয়ালু","কাইন্ড","She is very kind.","সে খুব দয়ালু।"],
+["Lazy","অলস","লেজি","A lazy student cannot succeed.","একজন অলস শিক্ষার্থী সফল হতে পারে না।"],
+["Necessary","প্রয়োজনীয়","নেসেসারি","Water is necessary for life.","জীবনের জন্য পানি প্রয়োজনীয়।"],
+["Polite","ভদ্র","পোলাইট","He is polite to everyone.","সে সবার সঙ্গে ভদ্র।"],
+["Poor","দরিদ্র","পুওর","The poor man needs help.","দরিদ্র লোকটির সাহায্য প্রয়োজন।"],
+["Rich","ধনী","রিচ","He is a rich businessman.","সে একজন ধনী ব্যবসায়ী।"],
+["Strong","শক্তিশালী","স্ট্রং","Exercise makes the body strong.","ব্যায়াম শরীরকে শক্তিশালী করে।"],
+["Weak","দুর্বল","উইক","He is too weak to walk.","সে হাঁটার জন্য খুব দুর্বল।"],
+["Wise","জ্ঞানী","ওয়াইজ","My grandfather is a wise man.","আমার দাদা একজন জ্ঞানী মানুষ।"],
+["Beautiful","সুন্দর","বিউটিফুল","The garden is beautiful.","বাগানটি সুন্দর।"],
+["Careless","অসতর্ক","কেয়ারলেস","A careless driver can cause accidents.","একজন অসতর্ক চালক দুর্ঘটনা ঘটাতে পারে।"],
+["Clever","বুদ্ধিমান","ক্লেভার","The clever boy solved the problem.","বুদ্ধিমান ছেলেটি সমস্যাটি সমাধান করল।"],
+["Friendly","বন্ধুত্বপূর্ণ","ফ্রেন্ডলি","Our teacher is friendly.","আমাদের শিক্ষক বন্ধুত্বপূর্ণ।"],
+["Helpful","সহায়ক","হেল্পফুল","He is always helpful.","সে সবসময় সহায়ক।"],
+["Quiet","শান্ত","কোয়ায়েট","The classroom is quiet.","শ্রেণিকক্ষটি শান্ত।"],
+["Serious","গুরুতর","সিরিয়াস","This is a serious matter.","এটি একটি গুরুতর বিষয়।"],
+["Famous","বিখ্যাত","ফেমাস","He is a famous singer.","তিনি একজন বিখ্যাত গায়ক।"]
+],
+7: [
+["Country","দেশ","কান্ট্রি","Bangladesh is my country.","বাংলাদেশ আমার দেশ।"],
+["Culture","সংস্কৃতি","কালচার","Our culture is rich.","আমাদের সংস্কৃতি সমৃদ্ধ।"],
+["Freedom","স্বাধীনতা","ফ্রিডম","We value our freedom.","আমরা আমাদের স্বাধীনতাকে মূল্য দিই।"],
+["History","ইতিহাস","হিস্ট্রি","I like to read history.","আমি ইতিহাস পড়তে পছন্দ করি।"],
+["Language","ভাষা","ল্যাঙ্গুয়েজ","Bangla is our mother language.","বাংলা আমাদের মাতৃভাষা।"],
+["Nation","জাতি","নেশন","We are a proud nation.","আমরা একটি গর্বিত জাতি।"],
+["People","মানুষ","পিপল","People live in this village.","এই গ্রামে মানুষ বাস করে।"],
+["Society","সমাজ","সোসাইটি","We should help our society.","আমাদের সমাজকে সাহায্য করা উচিত।"],
+["Village","গ্রাম","ভিলেজ","My grandparents live in a village.","আমার দাদা-দাদি একটি গ্রামে থাকেন।"],
+["City","শহর","সিটি","Dhaka is a busy city.","ঢাকা একটি ব্যস্ত শহর।"],
+["Nature","প্রকৃতি","নেচার","I love nature.","আমি প্রকৃতিকে ভালোবাসি।"],
+["River","নদী","রিভার","The river is very wide.","নদীটি খুব প্রশস্ত।"],
+["Forest","বন","ফরেস্ট","Many animals live in the forest.","অনেক প্রাণী বনে বাস করে।"],
+["Farmer","কৃষক","ফার্মার","The farmer works in the field.","কৃষক মাঠে কাজ করেন।"],
+["Student","শিক্ষার্থী","স্টুডেন্ট","I am a student.","আমি একজন শিক্ষার্থী।"],
+["Teacher","শিক্ষক","টিচার","My teacher is very kind.","আমার শিক্ষক খুব দয়ালু।"],
+["School","বিদ্যালয়","স্কুল","I go to school every day.","আমি প্রতিদিন স্কুলে যাই।"],
+["Education","শিক্ষা","এডুকেশন","Education is important.","শিক্ষা গুরুত্বপূর্ণ।"],
+["Future","ভবিষ্যৎ","ফিউচার","We should think about our future.","আমাদের ভবিষ্যৎ নিয়ে ভাবا উচিত।"],
+["Environment","পরিবেশ","এনভায়রনমেন্ট","We must protect the environment.","আমাদের পরিবেশ রক্ষা করতে হবে।"]
+],
+8: [
+["Goal","লক্ষ্য","গোল","My goal is to become a doctor.","আমার লক্ষ্য ডাক্তার হওয়া।"],
+["Success","সাফল্য","সাকসেস","Hard work brings success.","কঠোর পরিশ্রম সাফল্য আনে।"],
+["Failure","ব্যর্থতা","ফেইলিওর","Failure can teach us many things.","ব্যর্থতা আমাদের অনেক কিছু শেখাতে পারে।"],
+["Dream","স্বপ্ন","ড্রিম","I have a big dream.","আমার একটি বড় স্বপ্ন আছে।"],
+["Hope","আশা","হোপ","I hope you will succeed.","আমি আশা করি তুমি সফল হবে।"],
+["Plan","পরিকল্পনা","প্ল্যান","We made a study plan.","আমরা একটি পড়াশোনার পরিকল্পনা করেছি।"],
+["Practice","অনুশীলন","প্র্যাকটিস","Practice makes us better.","অনুশীলন আমাদের আরও ভালো করে।"],
+["Result","ফলাফল","রেজাল্ট","The exam result was good.","পরীক্ষার ফলাফল ভালো ছিল।"],
+["Hardworking","পরিশ্রমী","হার্ডওয়ার্কিং","He is a hardworking student.","সে একজন পরিশ্রমী শিক্ষার্থী।"],
+["Patient","ধৈর্যশীল","পেশেন্ট","Be patient and keep trying.","ধৈর্য ধরো এবং চেষ্টা চালিয়ে যাও।"],
+["Challenge","চ্যালেঞ্জ","চ্যালেঞ্জ","Every challenge makes us stronger.","প্রতিটি চ্যালেঞ্জ আমাদের শক্তিশালী করে।"],
+["Chance","সুযোগ","চান্স","Give me a chance.","আমাকে একটি সুযোগ দাও।"],
+["Choice","পছন্দ","চয়েস","This is your choice.","এটি তোমার পছন্দ।"],
+["Reason","কারণ","রিজন","Tell me the reason.","আমাকে কারণটি বলো।"],
+["Problem","সমস্যা","প্রবলেম","We have a problem.","আমাদের একটি সমস্যা আছে।"],
+["Solution","সমাধান","সলিউশন","We found a solution.","আমরা একটি সমাধান খুঁজে পেয়েছি।"],
+["Experience","অভিজ্ঞতা","এক্সপেরিয়েন্স","Experience is important for a job.","চাকরির জন্য অভিজ্ঞতা গুরুত্বপূর্ণ।"],
+["Skill","দক্ষতা","স্কিল","He has good computer skills.","তার ভালো কম্পিউটার দক্ষতা আছে।"],
+["Talent","প্রতিভা","ট্যালেন্ট","She has a talent for singing.","গান গাওয়ার প্রতিভা তার আছে।"],
+["Successor","উত্তরসূরি","সাকসেসর","The prince became the successor.","রাজপুত্র উত্তরসূরি হলেন।"]
+],
+9: [
+["Family","পরিবার","ফ্যামিলি","I love my family.","আমি আমার পরিবারকে ভালোবাসি।"],
+["Father","বাবা","ফাদার","My father is a teacher.","আমার বাবা একজন শিক্ষক।"],
+["Mother","মা","মাদার","My mother cooks delicious food.","আমার মা সুস্বাদু খাবার রান্না করেন।"],
+["Brother","ভাই","ব্রাদার","My brother helps me.","আমার ভাই আমাকে সাহায্য করে।"],
+["Sister","বোন","সিস্টার","My sister is very kind.","আমার বোন খুব দয়ালু।"],
+["Friend","বন্ধু","ফ্রেন্ড","He is my best friend.","সে আমার সবচেয়ে ভালো বন্ধু।"],
+["Neighbor","প্রতিবেশী","নেইবার","Our neighbor is friendly.","আমাদের প্রতিবেশী বন্ধুত্বপূর্ণ।"],
+["Parent","অভিভাবক","প্যারেন্ট","Parents care for their children.","অভিভাবকেরা তাদের সন্তানদের যত্ন নেন।"],
+["Child","শিশু","চাইল্ড","The child is playing.","শিশুটি খেলছে।"],
+["Adult","প্রাপ্তবয়স্ক","অ্যাডাল্ট","He is an adult now.","সে এখন একজন প্রাপ্তবয়স্ক।"],
+["Teacher","শিক্ষক","টিচার","Our teacher teaches English.","আমাদের শিক্ষক ইংরেজি শেখান।"],
+["Student","শিক্ষার্থী","স্টুডেন্ট","Every student should study hard.","প্রত্যেক শিক্ষার্থীর কঠোর পড়াশোনা করা উচিত।"],
+["Classmate","সহপাঠী","ক্লাসমেট","He is my classmate.","সে আমার সহপাঠী।"],
+["Leader","নেতা","লিডার","He is a good leader.","সে একজন ভালো নেতা।"],
+["Member","সদস্য","মেম্বার","I am a member of the club.","আমি ক্লাবের একজন সদস্য।"],
+["Guest","অতিথি","গেস্ট","We welcomed our guest.","আমরা আমাদের অতিথিকে স্বাগত জানিয়েছি।"],
+["Partner","সঙ্গী","পার্টনার","He is my study partner.","সে আমার পড়াশোনার সঙ্গী।"],
+["Person","ব্যক্তি","পারসন","He is a kind person.","সে একজন দয়ালু ব্যক্তি।"],
+["Community","সম্প্রদায়","কমিউনিটি","We should help our community.","আমাদের সমাজকে সাহায্য করা উচিত।"],
+["Citizen","নাগরিক","সিটিজেন","Every citizen has responsibilities.","প্রত্যেক নাগরিকের দায়িত্ব আছে।"]
+],
+10: [
+["Morning","সকাল","মর্নিং","I wake up in the morning.","আমি সকালে ঘুম থেকে উঠি।"],
+["Afternoon","দুপুর","আফটারনুন","I study in the afternoon.","আমি দুপুরে পড়াশোনা করি।"],
+["Evening","সন্ধ্যা","ইভনিং","We play in the evening.","আমরা সন্ধ্যায় খেলি।"],
+["Night","রাত","নাইট","I sleep at night.","আমি রাতে ঘুমাই।"],
+["Wake","জাগা","ওয়েক","I wake up early.","আমি তাড়াতাড়ি ঘুম থেকে উঠি।"],
+["Sleep","ঘুমানো","স্লিপ","I sleep at ten o'clock.","আমি দশটায় ঘুমাই।"],
+["Eat","খাওয়া","ইট","We eat rice every day.","আমরা প্রতিদিন ভাত খাই।"],
+["Drink","পান করা","ড্রিংক","Drink enough water.","পর্যাপ্ত পানি পান করো।"],
+["Read","পড়া","রিড","I read a book every day.","আমি প্রতিদিন একটি বই পড়ি।"],
+["Write","লেখা","রাইট","Write your name here.","এখানে তোমার নাম লেখো।"],
+["Study","অধ্যয়ন করা","স্টাডি","I study English every day.","আমি প্রতিদিন ইংরেজি অধ্যয়ন করি।"],
+["Work","কাজ করা","ওয়ার্ক","My father works hard.","আমার বাবা কঠোর পরিশ্রম করেন।"],
+["Play","খেলা","প্লে","The children play football.","শিশুরা ফুটবল খেলে।"],
+["Walk","হাঁটা","ওয়াক","I walk to school.","আমি হেঁটে স্কুলে যাই।"],
+["Run","দৌড়ানো","রান","He can run fast.","সে দ্রুত দৌড়াতে পারে।"],
+["Sit","বসা","সিট","Please sit here.","দয়া করে এখানে বসো।"],
+["Stand","দাঁড়ানো","স্ট্যান্ড","Please stand up.","দয়া করে দাঁড়াও।"],
+["Go","যাওয়া","গো","I go to school every day.","আমি প্রতিদিন স্কুলে যাই।"],
+["Come","আসা","কাম","Come to my house tomorrow.","আগামীকাল আমার বাড়িতে এসো।"],
+["Return","ফিরে আসা","রিটার্ন","I will return home soon.","আমি শীঘ্রই বাড়িতে ফিরে আসব।"]
+],
+11: [
+["Door","দরজা","ডোর","Please open the door.","দয়া করে দরজাটি খোলো।"],
+["Window","জানালা","উইন্ডো","The window is open.","জানালাটি খোলা।"],
+["Wall","দেয়াল","ওয়াল","The picture is on the wall.","ছবিটি দেয়ালে আছে।"],
+["Floor","মেঝে","ফ্লোর","The floor is clean.","মেঝেটি পরিষ্কার।"],
+["Roof","ছাদ","রুফ","The roof needs repair.","ছাদটি মেরামত করা দরকার।"],
+["Kitchen","রান্নাঘর","কিচেন","My mother is in the kitchen.","আমার মা রান্নাঘরে আছেন।"],
+["Bedroom","শোবার ঘর","বেডরুম","My bedroom is small.","আমার শোবার ঘরটি ছোট।"],
+["Bathroom","গোসলখানা","বাথরুম","The bathroom is clean.","গোসলখানাটি পরিষ্কার।"],
+["Garden","বাগান","গার্ডেন","There are flowers in the garden.","বাগানে ফুল আছে।"],
+["Chair","চেয়ার","চেয়ার","Please sit on the chair.","দয়া করে চেয়ারে বসো।"],
+["Table","টেবিল","টেবিল","The book is on the table.","বইটি টেবিলের ওপর।"],
+["Bed","বিছানা","বেড","The baby is sleeping on the bed.","শিশুটি বিছানায় ঘুমাচ্ছে।"],
+["Pillow","বালিশ","পিলো","This pillow is soft.","এই বালিশটি নরম।"],
+["Blanket","কম্বল","ব্ল্যাঙ্কেট","I need a warm blanket.","আমার একটি গরম কম্বল দরকার।"],
+["Mirror","আয়না","মিরর","She looked in the mirror.","সে আয়নায় তাকাল।"],
+["Clock","ঘড়ি","ক্লক","The clock shows ten o'clock.","ঘড়িতে দশটা বাজে।"],
+["Bottle","বোতল","বটল","The bottle is full of water.","বোতলটি পানিতে পূর্ণ।"],
+["Plate","প্লেট","প্লেট","Put the food on the plate.","খাবারটি প্লেটে রাখো।"],
+["Spoon","চামচ","স্পুন","I need a spoon.","আমার একটি চামচ দরকার।"],
+["Knife","ছুরি","নাইফ","Be careful with the knife.","ছুরিটি ব্যবহারে সাবধান হও।"]
+],
+12: [
+["Ask","জিজ্ঞাসা করা","আস্ক","I want to ask a question.","আমি একটি প্রশ্ন করতে চাই।"],
+["Bake","সেঁকা","বেক","She likes to bake cakes.","সে কেক বানাতে পছন্দ করে।"],
+["Breathe","শ্বাস নেওয়া","ব্রিদ","Breathe slowly and calmly.","ধীরে ও শান্তভাবে শ্বাস নাও।"],
+["Carry","বহন করা","ক্যারি","Can you carry this bag?","তুমি কি এই ব্যাগটি বহন করতে পারবে?"],
+["Catch","ধরা","ক্যাচ","Try to catch the ball.","বলটি ধরার চেষ্টা করো।"],
+["Climb","আরোহণ করা","ক্লাইম্ব","They climbed the hill.","তারা পাহাড়ে উঠেছিল।"],
+["Cook","রান্না করা","কুক","My father can cook well.","আমার বাবা ভালো রান্না করতে পারেন।"],
+["Dance","নাচা","ড্যান্স","The children dance happily.","শিশুরা আনন্দের সঙ্গে নাচে।"],
+["Draw","আঁকা","ড্র","She can draw a flower.","সে একটি ফুল আঁকতে পারে।"],
+["Drive","গাড়ি চালানো","ড্রাইভ","My uncle can drive a car.","আমার চাচা গাড়ি চালাতে পারেন।"],
+["Drop","ফেলে দেওয়া","ড্রপ","Do not drop the glass.","গ্লাসটি ফেলে দিও না।"],
+["Enter","প্রবেশ করা","এন্টার","Please enter the room.","দয়া করে ঘরে প্রবেশ করো।"],
+["Feed","খাওয়ানো","ফিড","We feed the birds every morning.","আমরা প্রতিদিন সকালে পাখিদের খাবার দিই।"],
+["Fix","ঠিক করা","ফিক্স","He fixed the broken chair.","সে ভাঙা চেয়ারটি ঠিক করেছে।"],
+["Fly","উড়া","ফ্লাই","Birds can fly in the sky.","পাখিরা আকাশে উড়তে পারে।"],
+["Grow","বেড়ে ওঠা","গ্রো","Plants grow with sunlight.","সূর্যের আলোতে গাছ বেড়ে ওঠে।"],
+["Hide","লুকানো","হাইড","The boy hid behind the door.","ছেলেটি দরজার পেছনে লুকিয়েছিল।"],
+["Hold","ধরা","হোল্ড","Hold my hand tightly.","আমার হাত শক্ত করে ধরো।"],
+["Knock","কড়া নাড়া","নক","Please knock on the door.","দয়া করে দরজায় কড়া নাড়ো।"],
+["Laugh","হাসা","লাফ","The children laughed loudly.","শিশুরা জোরে হেসেছিল।"]
+],
+13: [
+["Bored","বিরক্ত","বোর্ড","I feel bored at home.","বাড়িতে আমার বিরক্ত লাগছে।"],
+["Excited","উত্তেজিত","এক্সাইটেড","The children are excited about the trip.","শিশুরা ভ্রমণ নিয়ে উত্তেজিত।"],
+["Nervous","উদ্বিগ্ন","নার্ভাস","He felt nervous before speaking.","কথা বলার আগে সে উদ্বিগ্ন ছিল।"],
+["Proud","গর্বিত","প্রাউড","Her parents are proud of her.","তার বাবা-মা তাকে নিয়ে গর্বিত।"],
+["Ashamed","লজ্জিত","অ্যাশেমড","He felt ashamed of his mistake.","সে তার ভুলের জন্য লজ্জিত হয়েছিল।"],
+["Lonely","একাকী","লোনলি","The old man felt lonely.","বৃদ্ধ লোকটি একাকী অনুভব করলেন।"],
+["Jealous","ঈর্ষান্বিত","জেলাস","Do not be jealous of others.","অন্যদের প্রতি ঈর্ষান্বিত হয়ো না।"],
+["Surprised","বিস্মিত","সারপ্রাইজড","I was surprised by the news.","খবরটি শুনে আমি বিস্মিত হয়েছিলাম।"],
+["Tired","ক্লান্ত","টায়ার্ড","I am tired after the journey.","ভ্রমণের পর আমি ক্লান্ত।"],
+["Thirsty","তৃষ্ণার্ত","থার্স্টি","I am thirsty after running.","দৌড়ানোর পর আমার তৃষ্ণা পেয়েছে।"],
+["Hungry","ক্ষুধার্ত","হাংগ্রি","The child is hungry.","শিশুটি ক্ষুধার্ত।"],
+["Sleepy","ঘুমঘুম","স্লিপি","I feel sleepy now.","এখন আমার ঘুমঘুম লাগছে।"],
+["Busy","ব্যস্ত","বিজি","My father is busy today.","আমার বাবা আজ ব্যস্ত।"],
+["Free","মুক্ত/অবসর","ফ্রি","Are you free this evening?","আজ সন্ধ্যায় তুমি কি অবসর আছো?"],
+["Calm","শান্ত","কাম","The sea looks calm.","সমুদ্র শান্ত দেখাচ্ছে।"],
+["Confused","বিভ্রান্ত","কনফিউজড","I am confused about the question.","প্রশ্নটি নিয়ে আমি বিভ্রান্ত।"],
+["Delighted","আনন্দিত","ডিলাইটেড","She was delighted with the gift.","উপহারটি পেয়ে সে আনন্দিত হয়েছিল।"],
+["Disappointed","হতাশ","ডিসঅ্যাপয়েন্টেড","He was disappointed by the result.","ফলাফলে সে হতাশ হয়েছিল।"],
+["Fearful","ভীত","ফিয়ারফুল","The child was fearful of the storm.","শিশুটি ঝড়কে ভয় পেয়েছিল।"],
+["Grateful","কৃতজ্ঞ","গ্রেটফুল","I am grateful for your help.","তোমার সাহায্যের জন্য আমি কৃতজ্ঞ।"]
+],
+14: [
+["Effect","প্রভাব","ইফেক্ট","The medicine had a good effect.","ওষুধটির ভালো প্রভাব ছিল।"],
+["Method","পদ্ধতি","মেথড","This method is easy to follow.","এই পদ্ধতিটি অনুসরণ করা সহজ।"],
+["Process","প্রক্রিয়া","প্রসেস","Learning is a continuous process.","শেখা একটি চলমান প্রক্রিয়া।"],
+["System","ব্যবস্থা","সিস্টেম","The new system works well.","নতুন ব্যবস্থাটি ভালোভাবে কাজ করে।"],
+["Example","উদাহরণ","ইগজ্যাম্পল","Give me an example.","আমাকে একটি উদাহরণ দাও।"],
+["Pattern","ধরন","প্যাটার্ন","I noticed a strange pattern.","আমি একটি অদ্ভুত ধরন লক্ষ্য করেছি।"],
+["Purposeful","উদ্দেশ্যপূর্ণ","পারপাসফুল","He lives a purposeful life.","সে উদ্দেশ্যপূর্ণ জীবনযাপন করে।"],
+["Procession","শোভাযাত্রা","প্রসেশন","A procession passed through the street.","একটি শোভাযাত্রা রাস্তা দিয়ে গেল।"],
+["Systematic","সুশৃঙ্খল","সিস্টেম্যাটিক","Use a systematic approach.","একটি সুশৃঙ্খল পদ্ধতি ব্যবহার করো।"],
+["Theory","তত্ত্ব","থিওরি","The teacher explained the theory.","শিক্ষক তত্ত্বটি ব্যাখ্যা করলেন।"],
+["Fact","সত্য ঘটনা","ফ্যাক্ট","This is an important fact.","এটি একটি গুরুত্বপূর্ণ সত্য ঘটনা।"],
+["Detail","বিস্তারিত তথ্য","ডিটেইল","Tell me every detail.","আমাকে প্রতিটি বিস্তারিত তথ্য বলো।"],
+["Feature","বৈশিষ্ট্য","ফিচার","This phone has many useful features.","এই ফোনে অনেক উপকারী বৈশিষ্ট্য আছে।"],
+["Factor","উপাদান","ফ্যাক্টর","Time is an important factor.","সময় একটি গুরুত্বপূর্ণ উপাদান।"],
+["Causeway","বাঁধসদৃশ রাস্তা","কজওয়ে","The road crosses the wetland.","রাস্তাটি জলাভূমির ওপর দিয়ে গেছে।"],
+["Context","প্রেক্ষাপট","কনটেক্সট","Understand the word in context.","প্রেক্ষাপটে শব্দটির অর্থ বোঝো।"],
+["Concept","ধারণা","কনসেপ্ট","I understand the basic concept.","আমি মূল ধারণাটি বুঝি।"],
+["Topic","বিষয়","টপিক","Today's topic is interesting.","আজকের বিষয়টি আকর্ষণীয়।"],
+["Issue","বিষয়/সমস্যা","ইস্যু","We discussed the main issue.","আমরা মূল বিষয়টি আলোচনা করেছি।"],
+["Matter","বিষয়","ম্যাটার","This is a serious matter.","এটি একটি গুরুতর বিষয়।"]
+],
+15: [
+["Advantageous","সুবিধাজনক","অ্যাডভান্টেজাস","This plan is advantageous for us.","এই পরিকল্পনাটি আমাদের জন্য সুবিধাজনক।"],
+["Accurate","নির্ভুল","অ্যাকিউরেট","The measurement is accurate.","পরিমাপটি নির্ভুল।"],
+["Ancient","প্রাচীন","এইনশেন্ট","They found an ancient coin.","তারা একটি প্রাচীন মুদ্রা পেয়েছে।"],
+["Available","উপলভ্য","অ্যাভেইলেবল","Fresh fruit is available here.","এখানে তাজা ফল পাওয়া যায়।"],
+["Creative","সৃজনশীল","ক্রিয়েটিভ","She has a creative mind.","তার একটি সৃজনশীল মন আছে।"],
+["Curious","কৌতূহলী","কিউরিয়াস","The child is curious about science.","শিশুটি বিজ্ঞান সম্পর্কে কৌতূহলী।"],
+["Generous","উদার","জেনারাস","He is generous to everyone.","সে সবার প্রতি উদার।"],
+["Independent","স্বাধীন","ইন্ডিপেন্ডেন্ট","She wants to be independent.","সে স্বাধীন হতে চায়।"],
+["Ordinary","সাধারণ","অর্ডিনারি","It was an ordinary morning.","এটি একটি সাধারণ সকাল ছিল।"],
+["Precious","মূল্যবান","প্রেশাস","Gold is a precious metal.","সোনা একটি মূল্যবান ধাতু।"],
+["Reliable","নির্ভরযোগ্য","রিলায়েবল","He is a reliable person.","সে একজন নির্ভরযোগ্য ব্যক্তি।"],
+["Flexible","নমনীয়","ফ্লেক্সিবল","This material is flexible.","এই উপাদানটি নমনীয়।"],
+["Formal","আনুষ্ঠানিক","ফরমাল","He wore formal clothes.","সে আনুষ্ঠানিক পোশাক পরেছিল।"],
+["Gentle","নম্র","জেন্টল","Be gentle with the baby.","শিশুটির সঙ্গে নম্র আচরণ করো।"],
+["Humble","বিনয়ী","হাম্বল","He is rich but humble.","সে ধনী কিন্তু বিনয়ী।"],
+["Loyal","বিশ্বস্ত","লয়্যাল","A loyal friend is valuable.","একজন বিশ্বস্ত বন্ধু মূল্যবান।"],
+["Mature","পরিণত","ম্যাচিউর","He is mature for his age.","বয়সের তুলনায় সে পরিণত।"],
+["Polished","পরিশীলিত","পলিশড","She gave a polished speech.","সে একটি পরিশীলিত বক্তব্য দিয়েছে।"],
+["Rare","বিরল","রেয়ার","This bird is very rare.","এই পাখিটি খুব বিরল।"],
+["Unique","অনন্য","ইউনিক","Everyone has a unique talent.","প্রত্যেকের অনন্য প্রতিভা আছে।"]
+],
+16: [
+["Adapt","মানিয়ে নেওয়া","অ্যাডাপ্ট","We must adapt to change.","আমাদের পরিবর্তনের সঙ্গে মানিয়ে নিতে হবে।"],
+["Admit","স্বীকার করা","অ্যাডমিট","He admitted his mistake.","সে তার ভুল স্বীকার করেছে।"],
+["Advise","পরামর্শ দেওয়া","অ্যাডভাইজ","I advise you to study regularly.","আমি তোমাকে নিয়মিত পড়ার পরামর্শ দিই।"],
+["Announce","ঘোষণা করা","অ্যানাউন্স","They announced the result.","তারা ফলাফল ঘোষণা করেছে।"],
+["Apologize","ক্ষমা চাওয়া","অ্যাপোলজাইজ","He apologized to his friend.","সে তার বন্ধুর কাছে ক্ষমা চেয়েছে।"],
+["Appreciate","প্রশংসা করা","অ্যাপ্রিশিয়েট","I appreciate your effort.","আমি তোমার চেষ্টার প্রশংসা করি।"],
+["Approach","এগিয়ে আসা","অ্যাপ্রোচ","The bus approached the station.","বাসটি স্টেশনের কাছে এগিয়ে এলো।"],
+["Argue","তর্ক করা","আরগিউ","Do not argue with your parents.","তোমার বাবা-মায়ের সঙ্গে তর্ক করো না।"],
+["Attend","উপস্থিত থাকা","অ্যাটেন্ড","Students attend classes every day.","শিক্ষার্থীরা প্রতিদিন ক্লাসে উপস্থিত থাকে।"],
+["Behave","আচরণ করা","বিহেভ","Please behave properly.","দয়া করে ভালোভাবে আচরণ করো।"],
+["Calculate","হিসাব করা","ক্যালকুলেট","Calculate the total amount.","মোট পরিমাণ হিসাব করো।"],
+["Communicate","যোগাযোগ করা","কমিউনিকেট","We communicate through messages.","আমরা বার্তার মাধ্যমে যোগাযোগ করি।"],
+["Concentrate","মনোযোগ দেওয়া","কনসেনট্রেট","Concentrate on your studies.","তোমার পড়াশোনায় মনোযোগ দাও।"],
+["Confess","স্বীকার করা","কনফেস","He confessed the truth.","সে সত্য স্বীকার করেছে।"],
+["Connect","সংযোগ করা","কানেক্ট","Connect the cable to the device.","কেবলটি যন্ত্রের সঙ্গে সংযোগ করো।"],
+["Convince","বিশ্বাস করানো","কনভিন্স","I convinced him to study.","আমি তাকে পড়তে রাজি করিয়েছি।"],
+["Correct","সংশোধন করা","কারেক্ট","Please correct this sentence.","দয়া করে এই বাক্যটি সংশোধন করো।"],
+["Depend","নির্ভর করা","ডিপেন্ড","Children depend on their parents.","শিশুরা তাদের বাবা-মায়ের ওপর নির্ভর করে।"],
+["Encourage","উৎসাহ দেওয়া","এনকারেজ","Teachers encourage students.","শিক্ষকেরা শিক্ষার্থীদের উৎসাহ দেন।"],
+["Examine","পরীক্ষা করা","ইগজামিন","The doctor examined him.","ডাক্তার তাকে পরীক্ষা করলেন।"]
+],
+17: [
+["Expand","প্রসারিত করা","এক্সপ্যান্ড","The city continues to expand.","শহরটি ক্রমেই প্রসারিত হচ্ছে।"],
+["Explore","অনুসন্ধান করা","এক্সপ্লোর","We want to explore the forest.","আমরা বনটি অনুসন্ধান করতে চাই।"],
+["Express","প্রকাশ করা","এক্সপ্রেস","She expressed her feelings.","সে তার অনুভূতি প্রকাশ করেছে।"],
+["Generate","উৎপন্ন করা","জেনারেট","Solar panels generate electricity.","সৌর প্যানেল বিদ্যুৎ উৎপন্ন করে।"],
+["Handle","সামলানো","হ্যান্ডেল","Can you handle this situation?","তুমি কি এই পরিস্থিতি সামলাতে পারবে?"],
+["Identify","শনাক্ত করা","আইডেন্টিফাই","Can you identify the object?","তুমি কি বস্তুটি শনাক্ত করতে পারো?"],
+["Ignore","উপেক্ষা করা","ইগনোর","Do not ignore the warning.","সতর্কবার্তাটি উপেক্ষা করো না।"],
+["Inform","জানানো","ইনফর্ম","Please inform me about the plan.","পরিকল্পনাটি সম্পর্কে আমাকে জানাও।"],
+["Inspire","অনুপ্রাণিত করা","ইনস্পায়ার","His story inspires me.","তার গল্প আমাকে অনুপ্রাণিত করে।"],
+["Maintain","বজায় রাখা","মেইনটেইন","Maintain good habits.","ভালো অভ্যাস বজায় রাখো।"],
+["Measure","পরিমাপ করা","মেজার","Measure the length carefully.","দৈর্ঘ্যটি সাবধানে পরিমাপ করো।"],
+["Observe","পর্যবেক্ষণ করা","অবজার্ভ","Observe the experiment closely.","পরীক্ষাটি ভালোভাবে পর্যবেক্ষণ করো।"],
+["Perform","সম্পাদন করা","পারফর্ম","They performed a drama.","তারা একটি নাটক পরিবেশন করেছিল।"],
+["Prevent","প্রতিরোধ করা","প্রিভেন্ট","Exercise can prevent illness.","ব্যায়াম অসুস্থতা প্রতিরোধ করতে পারে।"],
+["Produce","উৎপাদন করা","প্রোডিউস","This factory produces shoes.","এই কারখানা জুতা উৎপাদন করে।"],
+["Recommend","সুপারিশ করা","রেকমেন্ড","I recommend this book.","আমি এই বইটি সুপারিশ করি।"],
+["Refuse","অস্বীকার করা","রিফিউজ","He refused to answer.","সে উত্তর দিতে অস্বীকার করল।"],
+["Remove","সরিয়ে ফেলা","রিমুভ","Remove your shoes before entering.","প্রবেশের আগে জুতা খুলে রাখো।"],
+["Replace","প্রতিস্থাপন করা","রিপ্লেস","Replace the old battery.","পুরোনো ব্যাটারিটি পরিবর্তন করো।"],
+["Respond","জবাব দেওয়া","রেসপন্ড","Please respond to my message.","দয়া করে আমার বার্তার জবাব দাও।"]
+],
+18: [
+["Achieveable","অর্জনযোগ্য","অ্যাচিভেবল","The target is achievable.","লক্ষ্যটি অর্জনযোগ্য।"],
+["Analyze","বিশ্লেষণ করা","অ্যানালাইজ","We need to analyze the data.","আমাদের তথ্য বিশ্লেষণ করতে হবে।"],
+["Assist","সহায়তা করা","অ্যাসিস্ট","Can you assist me?","তুমি কি আমাকে সাহায্য করতে পারো?"],
+["Attempt","চেষ্টা","অ্যাটেম্পট","He made another attempt.","সে আরেকটি চেষ্টা করল।"],
+["Avoidable","এড়ানো সম্ভব","অ্যাভয়ডেবল","The accident was avoidable.","দুর্ঘটনাটি এড়ানো সম্ভব ছিল।"],
+["Combine","একত্র করা","কম্বাইন","Combine these two parts.","এই দুটি অংশ একত্র করো।"],
+["Confirm","নিশ্চিত করা","কনফার্ম","Please confirm the information.","দয়া করে তথ্যটি নিশ্চিত করো।"],
+["Construct","নির্মাণ করা","কনস্ট্রাক্ট","Workers construct new houses.","শ্রমিকেরা নতুন বাড়ি নির্মাণ করেন।"],
+["Contribute","অবদান রাখা","কন্ট্রিবিউট","Everyone can contribute to society.","প্রত্যেকে সমাজে অবদান রাখতে পারে।"],
+["Cooperate","সহযোগিতা করা","কোঅপারেট","We should cooperate with others.","আমাদের অন্যদের সঙ্গে সহযোগিতা করা উচিত।"],
+["Define","সংজ্ঞায়িত করা","ডিফাইন","Can you define this word?","তুমি কি এই শব্দটির সংজ্ঞা দিতে পারো?"],
+["Demonstrate","প্রদর্শন করা","ডেমনস্ট্রেট","The teacher demonstrated the experiment.","শিক্ষক পরীক্ষাটি প্রদর্শন করলেন।"],
+["Determine","নির্ধারণ করা","ডিটারমিন","We must determine the cause.","আমাদের কারণটি নির্ধারণ করতে হবে।"],
+["Eliminate","দূর করা","ইলিমিনেট","We should eliminate bad habits.","আমাদের খারাপ অভ্যাস দূর করা উচিত।"],
+["Establish","প্রতিষ্ঠা করা","এস্টাবলিশ","They established a school.","তারা একটি স্কুল প্রতিষ্ঠা করেছে।"],
+["Evaluate","মূল্যায়ন করা","ইভ্যালুয়েট","Teachers evaluate students' work.","শিক্ষকেরা শিক্ষার্থীদের কাজ মূল্যায়ন করেন।"],
+["Examinee","পরীক্ষার্থী","ইগজ্যামিনি","Every examinee received a seat.","প্রত্যেক পরীক্ষার্থী একটি আসন পেয়েছে।"],
+["Generate","উৎপন্ন করা","জেনারেট","Wind turbines generate power.","বায়ু টারবাইন শক্তি উৎপন্ন করে।"],
+["Indicate","নির্দেশ করা","ইন্ডিকেট","The arrow indicates the direction.","তীরচিহ্নটি দিক নির্দেশ করে।"],
+["Interpret","ব্যাখ্যা করা","ইন্টারপ্রেট","Can you interpret this sentence?","তুমি কি এই বাক্যটি ব্যাখ্যা করতে পারো?"]
+],
+19: [
+["Locate","অবস্থান খুঁজে বের করা","লোকেট","Can you locate the building?","তুমি কি ভবনটির অবস্থান খুঁজে পাবে?"],
+["Modify","পরিবর্তন করা","মডিফাই","We need to modify the plan.","আমাদের পরিকল্পনাটি পরিবর্তন করতে হবে।"],
+["Obtain","অর্জন করা","অবটেইন","He obtained a certificate.","সে একটি সনদ অর্জন করেছে।"],
+["Participate","অংশগ্রহণ করা","পার্টিসিপেট","Students participate in sports.","শিক্ষার্থীরা খেলাধুলায় অংশগ্রহণ করে।"],
+["Predict","পূর্বানুমান করা","প্রেডিক্ট","Can you predict the result?","তুমি কি ফলাফল পূর্বানুমান করতে পারো?"],
+["Preserve","সংরক্ষণ করা","প্রিজার্ভ","We should preserve our heritage.","আমাদের ঐতিহ্য সংরক্ষণ করা উচিত।"],
+["Propose","প্রস্তাব করা","প্রোপোজ","He proposed a new plan.","সে একটি নতুন পরিকল্পনা প্রস্তাব করল।"],
+["Publish","প্রকাশ করা","পাবলিশ","The author published a book.","লেখক একটি বই প্রকাশ করেছেন।"],
+["Recognize","চেনা/স্বীকৃতি দেওয়া","রেকগনাইজ","I recognized his voice.","আমি তার কণ্ঠ চিনতে পেরেছি।"],
+["Recover","সুস্থ হয়ে ওঠা","রিকভার","He recovered quickly.","সে দ্রুত সুস্থ হয়ে উঠল।"],
+["Reflect","প্রতিফলিত করা","রিফ্লেক্ট","The water reflects the sky.","পানি আকাশের প্রতিফলন দেখায়।"],
+["Reject","প্রত্যাখ্যান করা","রিজেক্ট","They rejected the proposal.","তারা প্রস্তাবটি প্রত্যাখ্যান করেছে।"],
+["Release","মুক্ত করা/প্রকাশ করা","রিলিজ","The company released a new product.","কোম্পানিটি একটি নতুন পণ্য প্রকাশ করেছে।"],
+["Reveal","প্রকাশ করা","রিভিল","The report revealed the truth.","প্রতিবেদনটি সত্য প্রকাশ করেছে।"],
+["Select","নির্বাচন করা","সিলেক্ট","Select the correct answer.","সঠিক উত্তরটি নির্বাচন করো।"],
+["Strengthen","শক্তিশালী করা","স্ট্রেংথেন","Exercise strengthens the body.","ব্যায়াম শরীরকে শক্তিশালী করে।"],
+["Transform","রূপান্তর করা","ট্রান্সফর্ম","Education can transform lives.","শিক্ষা জীবনকে রূপান্তর করতে পারে।"],
+["Transmit","প্রেরণ করা","ট্রান্সমিট","The device transmits signals.","যন্ত্রটি সংকেত প্রেরণ করে।"],
+["Utilize","ব্যবহার করা","ইউটিলাইজ","We should utilize our resources.","আমাদের সম্পদ ব্যবহার করা উচিত।"],
+["Withdraw","প্রত্যাহার করা","উইথড্র","He withdrew money from the bank.","সে ব্যাংক থেকে টাকা তুলেছে।"]
+],
+20: [
+["Accountable","জবাবদিহিমূলক","অ্যাকাউন্টেবল","Leaders should be accountable.","নেতাদের জবাবদিহি করা উচিত।"],
+["Affordable","সাশ্রয়ী","অ্যাফোর্ডেবল","This phone is affordable.","এই ফোনটির দাম সাশ্রয়ী।"],
+["Ambitious","উচ্চাকাঙ্ক্ষী","অ্যাম্বিশাস","She is an ambitious student.","সে একজন উচ্চাকাঙ্ক্ষী শিক্ষার্থী।"],
+["Capable","সক্ষম","ক্যাপেবল","He is capable of doing the work.","সে কাজটি করতে সক্ষম।"],
+["Competitive","প্রতিযোগিতামূলক","কম্পেটিটিভ","The market is very competitive.","বাজারটি খুব প্রতিযোগিতামূলক।"],
+["Confidential","গোপনীয়","কনফিডেনশিয়াল","This information is confidential.","এই তথ্য গোপনীয়।"],
+["Convenient","সুবিধাজনক","কনভিনিয়েন্ট","Online shopping is convenient.","অনলাইনে কেনাকাটা সুবিধাজনক।"],
+["Critical","গুরুত্বপূর্ণ/সংকটপূর্ণ","ক্রিটিক্যাল","This is a critical situation.","এটি একটি সংকটপূর্ণ পরিস্থিতি।"],
+["Dependable","নির্ভরযোগ্য","ডিপেন্ডেবল","He is a dependable worker.","সে একজন নির্ভরযোগ্য কর্মী।"],
+["Efficient","দক্ষ","ইফিশিয়েন্ট","This machine is efficient.","এই মেশিনটি দক্ষতার সঙ্গে কাজ করে।"],
+["Essential","অপরিহার্য","এসেনশিয়াল","Water is essential for life.","জীবনের জন্য পানি অপরিহার্য।"],
+["Frequent","ঘন ঘন","ফ্রিকোয়েন্ট","Frequent practice improves skill.","ঘন ঘন অনুশীলন দক্ষতা বাড়ায়।"],
+["Generous","উদার","জেনারাস","The generous man helped the poor.","উদার লোকটি দরিদ্রদের সাহায্য করলেন।"],
+["Logical","যুক্তিসংগত","লজিক্যাল","Your answer is logical.","তোমার উত্তর যুক্তিসংগত।"],
+["Practical","ব্যবহারিক","প্র্যাকটিক্যাল","This is a practical solution.","এটি একটি ব্যবহারিক সমাধান।"],
+["Professional","পেশাদার","প্রফেশনাল","He gave a professional service.","সে পেশাদার সেবা দিয়েছে।"],
+["Reasonable","যুক্তিসংগত","রিজনেবল","The price is reasonable.","দামটি যুক্তিসংগত।"],
+["Stable","স্থিতিশীল","স্টেবল","The internet connection is stable.","ইন্টারনেট সংযোগটি স্থিতিশীল।"],
+["Temporary","অস্থায়ী","টেম্পোরারি","This is a temporary solution.","এটি একটি অস্থায়ী সমাধান।"],
+["Visible","দৃশ্যমান","ভিজিবল","The moon is visible tonight.","আজ রাতে চাঁদ দৃশ্যমান।"]
+],
+21: [
+["Absence","অনুপস্থিতি","অ্যাবসেন্স","His absence was noticed.","তার অনুপস্থিতি লক্ষ্য করা হয়েছিল।"],
+["Access","প্রবেশাধিকার","অ্যাকসেস","Students have access to the library.","শিক্ষার্থীদের লাইব্রেরিতে প্রবেশাধিকার আছে।"],
+["Achievement","অর্জন","অ্যাচিভমেন্ট","Winning the prize was a great achievement.","পুরস্কার জেতা একটি বড় অর্জন ছিল।"],
+["Activity","কার্যক্রম","অ্যাক্টিভিটি","The school has many activities.","স্কুলে অনেক কার্যক্রম আছে।"],
+["Agreement","সম্মতি","অ্যাগ্রিমেন্ট","They reached an agreement.","তারা একটি সমঝোতায় পৌঁছেছে।"],
+["Announcement","ঘোষণা","অ্যানাউন্সমেন্ট","We heard an announcement.","আমরা একটি ঘোষণা শুনলাম।"],
+["Appearance","চেহারা/উপস্থিতি","অ্যাপিয়ারেন্স","His appearance has changed.","তার চেহারায় পরিবর্তন এসেছে।"],
+["Application","আবেদন/অ্যাপ্লিকেশন","অ্যাপ্লিকেশন","I submitted my application.","আমি আমার আবেদন জমা দিয়েছি।"],
+["Arrival","আগমন","অ্যারাইভাল","We waited for his arrival.","আমরা তার আগমনের অপেক্ষা করেছিলাম।"],
+["Attention","মনোযোগ","অ্যাটেনশন","The lesson needs your attention.","পাঠটির জন্য তোমার মনোযোগ প্রয়োজন।"],
+["Behavior","আচরণ","বিহেভিয়ার","Good behavior is important.","ভালো আচরণ গুরুত্বপূর্ণ।"],
+["Belief","বিশ্বাস","বিলিফ","His belief is strong.","তার বিশ্বাস দৃঢ়।"],
+["Communication","যোগাযোগ","কমিউনিকেশন","Good communication prevents confusion.","ভালো যোগাযোগ বিভ্রান্তি দূর করে।"],
+["Competition","প্রতিযোগিতা","কম্পিটিশন","The competition was difficult.","প্রতিযোগিতাটি কঠিন ছিল।"],
+["Conclusion","উপসংহার","কনক্লুশন","The conclusion was clear.","উপসংহারটি পরিষ্কার ছিল।"],
+["Condition","অবস্থা","কন্ডিশন","The car is in good condition.","গাড়িটির অবস্থা ভালো।"],
+["Connection","সংযোগ","কানেকশন","The connection is weak.","সংযোগটি দুর্বল।"],
+["Conversation","কথোপকথন","কনভারসেশন","We had a useful conversation.","আমাদের একটি উপকারী কথোপকথন হয়েছিল।"],
+["Discussion","আলোচনা","ডিসকাশন","The discussion lasted an hour.","আলোচনা এক ঘণ্টা চলেছিল।"],
+["Decision","সিদ্ধান্ত","ডিসিশন","It was a difficult decision.","এটি একটি কঠিন সিদ্ধান্ত ছিল।"]
+],
+22: [
+["Economy","অর্থনীতি","ইকোনমি","The country's economy is growing.","দেশের অর্থনীতি বৃদ্ধি পাচ্ছে।"],
+["Industry","শিল্প","ইন্ডাস্ট্রি","The textile industry is important.","বস্ত্রশিল্প গুরুত্বপূর্ণ।"],
+["Business","ব্যবসা","বিজনেস","His business is growing.","তার ব্যবসা বাড়ছে।"],
+["Company","কোম্পানি","কোম্পানি","The company hired new workers.","কোম্পানিটি নতুন কর্মী নিয়েছে।"],
+["Customer","ক্রেতা","কাস্টমার","The customer asked for help.","ক্রেতা সাহায্য চাইলেন।"],
+["Product","পণ্য","প্রোডাক্ট","This product is popular.","এই পণ্যটি জনপ্রিয়।"],
+["Service","সেবা","সার্ভিস","The hotel provides good service.","হোটেলটি ভালো সেবা দেয়।"],
+["Price","দাম","প্রাইস","The price is too high.","দামটি অনেক বেশি।"],
+["Profit","লাভ","প্রফিট","The shop made a good profit.","দোকানটি ভালো লাভ করেছে।"],
+["Loss","ক্ষতি/লোকসান","লস","The company suffered a loss.","কোম্পানিটি লোকসানের সম্মুখীন হয়েছে।"],
+["Salary","বেতন","স্যালারি","He receives his salary monthly.","সে প্রতি মাসে বেতন পায়।"],
+["Worker","শ্রমিক","ওয়ার্কার","The worker repaired the machine.","শ্রমিকটি মেশিনটি মেরামত করেছে।"],
+["Office","কার্যালয়","অফিস","My father works in an office.","আমার বাবা একটি অফিসে কাজ করেন।"],
+["Manager","ব্যবস্থাপক","ম্যানেজার","The manager called a meeting.","ব্যবস্থাপক একটি সভা ডাকলেন।"],
+["Owner","মালিক","ওনার","The owner opened the shop.","মালিক দোকানটি খুললেন।"],
+["Factory","কারখানা","ফ্যাক্টরি","The factory produces clothes.","কারখানাটি পোশাক উৎপাদন করে।"],
+["Machine","যন্ত্র","মেশিন","The machine stopped suddenly.","মেশিনটি হঠাৎ বন্ধ হয়ে গেল।"],
+["Material","উপাদান","ম্যাটেরিয়াল","This material is strong.","এই উপাদানটি শক্ত।"],
+["Marketable","বিক্রয়যোগ্য","মার্কেটেবল","The product is highly marketable.","পণ্যটি সহজে বিক্রয়যোগ্য।"],
+["Income","আয়","ইনকাম","His monthly income is stable.","তার মাসিক আয় স্থিতিশীল।"]
+],
+23: [
+["Knowledgeable","জ্ঞানসম্পন্ন","নলেজেবল","He is knowledgeable about computers.","কম্পিউটার সম্পর্কে তার ভালো জ্ঞান আছে।"],
+["Scholar","পণ্ডিত/গবেষক","স্কলার","The scholar wrote an important paper.","পণ্ডিত ব্যক্তি একটি গুরুত্বপূর্ণ প্রবন্ধ লিখেছেন।"],
+["Researcher","গবেষক","রিসার্চার","The researcher collected information.","গবেষক তথ্য সংগ্রহ করেছেন।"],
+["Professor","অধ্যাপক","প্রফেসর","The professor gave a lecture.","অধ্যাপক একটি বক্তৃতা দিলেন।"],
+["Principal","প্রধান শিক্ষক","প্রিন্সিপাল","The principal visited our class.","প্রধান শিক্ষক আমাদের ক্লাস পরিদর্শন করলেন।"],
+["Lecture","বক্তৃতা","লেকচার","Today's lecture was interesting.","আজকের বক্তৃতাটি আকর্ষণীয় ছিল।"],
+["Subjective","ব্যক্তিনির্ভর","সাবজেক্টিভ","The question is subjective.","প্রশ্নটি ব্যক্তিনির্ভর।"],
+["Objective","বস্তুনিষ্ঠ","অবজেক্টিভ","The test has objective questions.","পরীক্ষায় বস্তুনিষ্ঠ প্রশ্ন আছে।"],
+["Assignment","নির্ধারিত কাজ","অ্যাসাইনমেন্ট","I completed my assignment.","আমি আমার নির্ধারিত কাজ শেষ করেছি।"],
+["Certificate","সনদ","সার্টিফিকেট","She received a certificate.","সে একটি সনদ পেয়েছে।"],
+["Degree","ডিগ্রি","ডিগ্রি","He earned a university degree.","সে বিশ্ববিদ্যালয়ের ডিগ্রি অর্জন করেছে।"],
+["College","কলেজ","কলেজ","My brother studies at college.","আমার ভাই কলেজে পড়ে।"],
+["University","বিশ্ববিদ্যালয়","ইউনিভার্সিটি","She wants to attend university.","সে বিশ্ববিদ্যালয়ে পড়তে চায়।"],
+["Knowledgeable","জ্ঞানী","নলেজেবল","Our teacher is knowledgeable.","আমাদের শিক্ষক জ্ঞানী।"],
+["Course","পাঠ্যক্রম","কোর্স","I joined an English course.","আমি একটি ইংরেজি কোর্সে ভর্তি হয়েছি।"],
+["Subject","বিষয়","সাবজেক্ট","Science is an interesting subject.","বিজ্ঞান একটি আকর্ষণীয় বিষয়।"],
+["Chapter","অধ্যায়","চ্যাপ্টার","Read the next chapter.","পরের অধ্যায়টি পড়ো।"],
+["Exercise","অনুশীলনী","এক্সারসাইজ","Complete the grammar exercise.","ব্যাকরণের অনুশীলনীটি শেষ করো।"],
+["Dictionary","অভিধান","ডিকশনারি","Use a dictionary for difficult words.","কঠিন শব্দের জন্য অভিধান ব্যবহার করো।"],
+["Meaning","অর্থ","মিনিং","Find the meaning of this word.","এই শব্দটির অর্থ খুঁজে বের করো।"]
+],
+24: [
+["Journeyer","ভ্রমণকারী","জার্নিয়ার","The journeyer carried a small bag.","ভ্রমণকারী একটি ছোট ব্যাগ বহন করছিল।"],
+["Passenger","যাত্রী","প্যাসেঞ্জার","Every passenger had a ticket.","প্রত্যেক যাত্রীর একটি টিকিট ছিল।"],
+["Airport","বিমানবন্দর","এয়ারপোর্ট","The airport was crowded.","বিমানবন্দরটি ভিড়পূর্ণ ছিল।"],
+["Station","স্টেশন","স্টেশন","The train arrived at the station.","ট্রেনটি স্টেশনে পৌঁছাল।"],
+["Ticket","টিকিট","টিকিট","I bought a bus ticket.","আমি একটি বাসের টিকিট কিনেছি।"],
+["Vehicle","যানবাহন","ভিহিকল","This vehicle is fast.","এই যানবাহনটি দ্রুত।"],
+["Driver","চালক","ড্রাইভার","The driver stopped the car.","চালক গাড়িটি থামালেন।"],
+["Traffic","যান চলাচল","ট্রাফিক","Traffic is heavy today.","আজ যান চলাচল অনেক বেশি।"],
+["Destination","গন্তব্য","ডেস্টিনেশন","We reached our destination.","আমরা আমাদের গন্তব্যে পৌঁছেছি।"],
+["Tourist","পর্যটক","ট্যুরিস্ট","The tourist took many photos.","পর্যটক অনেক ছবি তুললেন।"],
+["Guide","পথপ্রদর্শক","গাইড","The guide showed us the museum.","পথপ্রদর্শক আমাদের জাদুঘর দেখালেন।"],
+["Map","মানচিত্র","ম্যাপ","Look at the map.","মানচিত্রটির দিকে তাকাও।"],
+["Direction","দিক","ডিরেকশন","Which direction should we take?","আমাদের কোন দিকে যাওয়া উচিত?"],
+["Distance","দূরত্ব","ডিস্ট্যান্স","The distance is very long.","দূরত্বটি অনেক বেশি।"],
+["Hotel","হোটেল","হোটেল","We stayed in a hotel.","আমরা একটি হোটেলে ছিলাম।"],
+["Beach","সমুদ্রসৈকত","বিচ","The beach was crowded.","সমুদ্রসৈকতে অনেক ভিড় ছিল।"],
+["Mountain","পাহাড়","মাউন্টেন","The mountain looks beautiful.","পাহাড়টি সুন্দর দেখাচ্ছে।"],
+["Island","দ্বীপ","আইল্যান্ড","They visited a small island.","তারা একটি ছোট দ্বীপে গিয়েছিল।"],
+["Museum","জাদুঘর","মিউজিয়াম","The museum has ancient objects.","জাদুঘরে প্রাচীন জিনিস আছে।"],
+["Landmark","বিশিষ্ট স্থান","ল্যান্ডমার্ক","The tower is a famous landmark.","টাওয়ারটি একটি বিখ্যাত দর্শনীয় স্থান।"]
+],
+25: [
+["Religion","ধর্ম","রিলিজিয়ন","People follow different religions.","মানুষ বিভিন্ন ধর্ম অনুসরণ করে।"],
+["Festival","উৎসব","ফেস্টিভ্যাল","The festival begins tomorrow.","উৎসবটি আগামীকাল শুরু হবে।"],
+["Ceremony","অনুষ্ঠান","সেরিমনি","The ceremony was beautiful.","অনুষ্ঠানটি সুন্দর ছিল।"],
+["Heritage","ঐতিহ্য","হেরিটেজ","We should protect our heritage.","আমাদের ঐতিহ্য রক্ষা করা উচিত।"],
+["Monument","স্মৃতিস্তম্ভ","মনুমেন্ট","The monument is very old.","স্মৃতিস্তম্ভটি অনেক পুরোনো।"],
+["Custom","প্রথা","কাস্টম","This custom is common here.","এই প্রথাটি এখানে প্রচলিত।"],
+["Belong","অন্তর্ভুক্ত হওয়া","বিলং","This book belongs to me.","এই বইটি আমার।"],
+["Celebrate","উদযাপন করা","সেলিব্রেট","We celebrate special occasions.","আমরা বিশেষ অনুষ্ঠান উদযাপন করি।"],
+["Respectful","শ্রদ্ধাশীল","রেসপেক্টফুল","He is respectful to elders.","সে বড়দের প্রতি শ্রদ্ধাশীল।"],
+["Spiritual","আধ্যাত্মিক","স্পিরিচুয়াল","Prayer gives spiritual peace.","প্রার্থনা আধ্যাত্মিক শান্তি দেয়।"],
+["Sacred","পবিত্র","সেইক্রেড","This is a sacred place.","এটি একটি পবিত্র স্থান।"],
+["Moral","নৈতিক","মোরাল","We should learn moral lessons.","আমাদের নৈতিক শিক্ষা নেওয়া উচিত।"],
+["Ethical","নৈতিকতাসম্পন্ন","এথিক্যাল","We should make ethical choices.","আমাদের নৈতিক সিদ্ধান্ত নেওয়া উচিত।"],
+["Customary","প্রচলিত","কাস্টমারি","This greeting is customary here.","এই অভিবাদনটি এখানে প্রচলিত।"],
+["Historical","ঐতিহাসিক","হিস্টোরিক্যাল","This building has historical value.","এই ভবনের ঐতিহাসিক মূল্য আছে।"],
+["Nationalism","জাতীয়তাবাদ","ন্যাশনালিজম","Nationalism influenced the movement.","জাতীয়তাবাদ আন্দোলনটিকে প্রভাবিত করেছিল।"],
+["Patriot","দেশপ্রেমিক","প্যাট্রিয়ট","A patriot loves the country.","একজন দেশপ্রেমিক দেশকে ভালোবাসেন।"],
+["Patriotic","দেশপ্রেমমূলক","প্যাট্রিয়টিক","He gave a patriotic speech.","সে একটি দেশপ্রেমমূলক বক্তব্য দিয়েছে।"],
+["Unity","ঐক্য","ইউনিটি","Unity makes us stronger.","ঐক্য আমাদের শক্তিশালী করে।"],
+["Harmony","সম্প্রীতি","হারমনি","We should live in harmony.","আমাদের সম্প্রীতির সঙ্গে বসবাস করা উচিত।"]
+],
+26: [
+["Software","সফটওয়্যার","সফটওয়্যার","The software needs an update.","সফটওয়্যারটির আপডেট প্রয়োজন।"],
+["Hardware","হার্ডওয়্যার","হার্ডওয়্যার","The computer hardware is powerful.","কম্পিউটারের হার্ডওয়্যার শক্তিশালী।"],
+["Browser","ব্রাউজার","ব্রাউজার","Open the website in a browser.","ব্রাউজারে ওয়েবসাইটটি খোলো।"],
+["Program","প্রোগ্রাম","প্রোগ্রাম","This program is useful.","এই প্রোগ্রামটি উপকারী।"],
+["Update","হালনাগাদ করা","আপডেট","Update the application regularly.","অ্যাপ্লিকেশনটি নিয়মিত আপডেট করো।"],
+["Install","স্থাপন করা","ইনস্টল","Install the software carefully.","সফটওয়্যারটি সাবধানে ইনস্টল করো।"],
+["Delete","মুছে ফেলা","ডিলিট","Delete unnecessary files.","অপ্রয়োজনীয় ফাইল মুছে ফেলো।"],
+["Copy","অনুলিপি করা","কপি","Copy the text carefully.","লেখাটি সাবধানে কপি করো।"],
+["Paste","প্রতিলিপি বসানো","পেস্ট","Paste the text here.","এখানে লেখাটি পেস্ট করো।"],
+["Print","মুদ্রণ করা","প্রিন্ট","Print this document.","এই ডকুমেন্টটি প্রিন্ট করো।"],
+["Document","নথি","ডকুমেন্ট","Open the document.","ডকুমেন্টটি খোলো।"],
+["Data","উপাত্ত","ডেটা","The computer stores data.","কম্পিউটার তথ্য সংরক্ষণ করে।"],
+["Storage","সংরক্ষণস্থান","স্টোরেজ","This phone has enough storage.","এই ফোনে যথেষ্ট স্টোরেজ আছে।"],
+["Battery","ব্যাটারি","ব্যাটারি","The battery is low.","ব্যাটারির চার্জ কম।"],
+["Charger","চার্জার","চার্জার","Where is my charger?","আমার চার্জার কোথায়?"],
+["Cable","তার","কেবল","Connect the cable properly.","কেবলটি সঠিকভাবে সংযোগ করো।"],
+["Device","যন্ত্র","ডিভাইস","This device is easy to use.","এই যন্ত্রটি ব্যবহার করা সহজ।"],
+["Account","অ্যাকাউন্ট","অ্যাকাউন্ট","I created a new account.","আমি একটি নতুন অ্যাকাউন্ট তৈরি করেছি।"],
+["Login","প্রবেশ করা","লগইন","Login to your account.","তোমার অ্যাকাউন্টে প্রবেশ করো।"],
+["Logout","বের হয়ে যাওয়া","লগআউট","Remember to logout.","লগআউট করতে মনে রেখো।"]
+],
+27: [
+["Health","স্বাস্থ্য","হেলথ","Good food is important for health.","সুস্বাস্থ্যের জন্য ভালো খাবার গুরুত্বপূর্ণ।"],
+["Disease","রোগ","ডিজিজ","Clean water prevents disease.","পরিষ্কার পানি রোগ প্রতিরোধ করে।"],
+["Doctor","ডাক্তার","ডক্টর","The doctor examined the patient.","ডাক্তার রোগীকে পরীক্ষা করলেন।"],
+["Medicine","ওষুধ","মেডিসিন","Take the medicine on time.","সময়মতো ওষুধ খাও।"],
+["Patient","রোগী","পেশেন্ট","The patient needs rest.","রোগীর বিশ্রাম প্রয়োজন।"],
+["Fresh","তাজা","ফ্রেশ","Fresh vegetables are healthy.","তাজা সবজি স্বাস্থ্যকর।"],
+["Energy","শক্তি","এনার্জি","Food gives us energy.","খাবার আমাদের শক্তি দেয়।"],
+["Body","শরীর","বডি","Exercise keeps the body fit.","ব্যায়াম শরীরকে সুস্থ রাখে।"],
+["Mind","মন","মাইন্ড","Reading develops the mind.","পড়া মনকে বিকশিত করে।"],
+["Heart","হৃদয়","হার্ট","Exercise is good for the heart.","ব্যায়াম হৃদয়ের জন্য ভালো।"],
+["Brain","মস্তিষ্ক","ব্রেইন","The brain controls the body.","মস্তিষ্ক শরীর নিয়ন্ত্রণ করে।"],
+["Blood","রক্ত","ব্লাড","Blood flows through the body.","রক্ত শরীরের মধ্যে প্রবাহিত হয়।"],
+["Bone","হাড়","বোন","Milk helps strengthen bones.","দুধ হাড় শক্ত করতে সাহায্য করে।"],
+["Skin","ত্বক","স্কিন","Keep your skin clean.","তোমার ত্বক পরিষ্কার রাখো।"],
+["Muscle","পেশি","মাসল","Exercise builds strong muscles.","ব্যায়াম শক্তিশালী পেশি তৈরি করে।"],
+["Breath","শ্বাস","ব্রেথ","Take a deep breath.","গভীর শ্বাস নাও।"],
+["Vitamin","ভিটামিন","ভিটামিন","Fruits contain many vitamins.","ফলে অনেক ভিটামিন থাকে।"],
+["Protein","প্রোটিন","প্রোটিন","Eggs contain protein.","ডিমে প্রোটিন থাকে।"],
+["Disease-free","রোগমুক্ত","ডিজিজ-ফ্রি","Clean habits help us stay disease-free.","পরিষ্কার অভ্যাস আমাদের রোগমুক্ত থাকতে সাহায্য করে।"],
+["Treatment","চিকিৎসা","ট্রিটমেন্ট","The patient needs proper treatment.","রোগীর সঠিক চিকিৎসা প্রয়োজন।"]
+],
+28: [
+["Government","সরকার","গভর্নমেন্ট","The government announced a new policy.","সরকার একটি নতুন নীতি ঘোষণা করেছে।"],
+["Parliament","সংসদ","পার্লামেন্ট","The law was discussed in parliament.","আইনটি সংসদে আলোচনা করা হয়েছিল।"],
+["Minister","মন্ত্রী","মিনিস্টার","The minister gave a speech.","মন্ত্রী একটি বক্তব্য দিয়েছেন।"],
+["President","রাষ্ট্রপতি","প্রেসিডেন্ট","The president addressed the nation.","রাষ্ট্রপতি জাতির উদ্দেশে বক্তব্য দিলেন।"],
+["Election","নির্বাচন","ইলেকশন","The election will be held soon.","নির্বাচন শিগগির অনুষ্ঠিত হবে।"],
+["Voter","ভোটার","ভোটার","Every voter has a right to vote.","প্রত্যেক ভোটারের ভোট দেওয়ার অধিকার আছে।"],
+["Vote","ভোট","ভোট","Citizens cast their votes.","নাগরিকেরা তাদের ভোট দেন।"],
+["Democracy","গণতন্ত্র","ডেমোক্রেসি","Democracy gives people a voice.","গণতন্ত্র মানুষকে মত প্রকাশের সুযোগ দেয়।"],
+["Rights","অধিকার","রাইটস","Everyone has basic rights.","সবার মৌলিক অধিকার আছে।"],
+["Freedom","স্বাধীনতা","ফ্রিডম","Freedom is valuable.","স্বাধীনতা মূল্যবান।"],
+["Justice","ন্যায়বিচার","জাস্টিস","Everyone deserves justice.","প্রত্যেকের ন্যায়বিচার প্রাপ্য।"],
+["Court","আদালত","কোর্ট","The case went to court.","মামলাটি আদালতে গিয়েছিল।"],
+["Judge","বিচারক","জাজ","The judge heard the case.","বিচারক মামলাটি শুনলেন।"],
+["Police","পুলিশ","পুলিশ","The police arrived quickly.","পুলিশ দ্রুত এসে পৌঁছাল।"],
+["Citizen","নাগরিক","সিটিজেন","Every citizen has responsibilities.","প্রত্যেক নাগরিকের দায়িত্ব আছে।"],
+["Public","জনসাধারণের","পাবলিক","This is a public place.","এটি একটি জনসাধারণের স্থান।"],
+["Private","ব্যক্তিগত","প্রাইভেট","This is a private school.","এটি একটি বেসরকারি স্কুল।"],
+["Policy","নীতি","পলিসি","The company has a strict policy.","কোম্পানিটির কঠোর নীতি আছে।"],
+["Authority","কর্তৃপক্ষ","অথরিটি","The authority approved the plan.","কর্তৃপক্ষ পরিকল্পনাটি অনুমোদন করেছে।"],
+["Responsibility","দায়িত্ব","রেসপনসিবিলিটি","We have a responsibility to help.","সাহায্য করা আমাদের দায়িত্ব।"]
+],
+29: [
+["Climate","জলবায়ু","ক্লাইমেট","The climate is changing.","জলবায়ু পরিবর্তিত হচ্ছে।"],
+["Temperature","তাপমাত্রা","টেম্পারেচার","The temperature is rising.","তাপমাত্রা বাড়ছে।"],
+["Storm","ঝড়","স্টর্ম","A strong storm is coming.","একটি শক্তিশালী ঝড় আসছে।"],
+["Cloud","মেঘ","ক্লাউড","Dark clouds covered the sky.","কালো মেঘ আকাশ ঢেকে দিয়েছে।"],
+["Wind","বাতাস","উইন্ড","The wind is very strong.","বাতাস খুব শক্তিশালী।"],
+["Thunder","বজ্রধ্বনি","থান্ডার","We heard loud thunder.","আমরা জোরে বজ্রধ্বনি শুনলাম।"],
+["Lightning","বজ্রপাত","লাইটনিং","Lightning lit up the sky.","বজ্রপাত আকাশ আলোকিত করল।"],
+["Flood","বন্যা","ফ্লাড","The village suffered from a flood.","গ্রামটি বন্যায় ক্ষতিগ্রস্ত হয়েছে।"],
+["Drought","খরা","ড্রাউট","The region suffered from drought.","অঞ্চলটি খরায় আক্রান্ত হয়েছিল।"],
+["Natural","প্রাকৃতিক","ন্যাচারাল","We should protect natural resources.","আমাদের প্রাকৃতিক সম্পদ রক্ষা করা উচিত।"],
+["Resource","সম্পদ","রিসোর্স","Water is a valuable resource.","পানি একটি মূল্যবান সম্পদ।"],
+["Pollution","দূষণ","পলিউশন","Pollution harms the environment.","দূষণ পরিবেশের ক্ষতি করে।"],
+["Recycle","পুনর্ব্যবহার করা","রিসাইকেল","We should recycle plastic.","আমাদের প্লাস্টিক পুনর্ব্যবহার করা উচিত।"],
+["Waste","বর্জ্য","ওয়েস্ট","Do not throw waste on the road.","রাস্তায় বর্জ্য ফেলো না।"],
+["Plastic","প্লাস্টিক","প্লাস্টিক","Plastic pollution is dangerous.","প্লাস্টিক দূষণ বিপজ্জনক।"],
+["Wildlife","বন্যপ্রাণী","ওয়াইল্ডলাইফ","We must protect wildlife.","আমাদের বন্যপ্রাণী রক্ষা করতে হবে।"],
+["Species","প্রজাতি","স্পিশিজ","Many species live here.","এখানে অনেক প্রজাতি বাস করে।"],
+["Ocean","মহাসাগর","ওশান","The ocean is vast.","মহাসাগর বিশাল।"],
+["Desert","মরুভূমি","ডেজার্ট","The desert is very dry.","মরুভূমি খুব শুষ্ক।"],
+["Waterfall","জলপ্রপাত","ওয়াটারফল","The waterfall is beautiful.","জলপ্রপাতটি সুন্দর।"]
+],
+30: [
+["Acceptable","গ্রহণযোগ্য","অ্যাকসেপ্টেবল","Your answer is acceptable.","তোমার উত্তর গ্রহণযোগ্য।"],
+["Accessible","সহজে ব্যবহারযোগ্য","অ্যাক্সেসিবল","The building is accessible to everyone.","ভবনটি সবার জন্য ব্যবহারযোগ্য।"],
+["Additional","অতিরিক্ত","অ্যাডিশনাল","We need additional information.","আমাদের অতিরিক্ত তথ্য প্রয়োজন।"],
+["Alternative","বিকল্প","অল্টারনেটিভ","We need an alternative plan.","আমাদের একটি বিকল্প পরিকল্পনা দরকার।"],
+["Annual","বার্ষিক","অ্যানুয়াল","The school holds an annual event.","স্কুলটি একটি বার্ষিক অনুষ্ঠান আয়োজন করে।"],
+["Average","গড়","অ্যাভারেজ","The average score was high.","গড় নম্বর বেশি ছিল।"],
+["Central","কেন্দ্রীয়","সেন্ট্রাল","The central office is nearby.","কেন্দ্রীয় অফিসটি কাছেই।"],
+["Complex","জটিল","কমপ্লেক্স","This is a complex problem.","এটি একটি জটিল সমস্যা।"],
+["Constant","ধ্রুব/অবিরাম","কনস্ট্যান্ট","Constant practice brings improvement.","অবিরাম অনুশীলন উন্নতি আনে।"],
+["Conveniently","সুবিধাজনকভাবে","কনভিনিয়েন্টলি","The shop is conveniently located.","দোকানটি সুবিধাজনক স্থানে অবস্থিত।"],
+["Domestic","গৃহস্থালি/দেশীয়","ডোমেস্টিক","Domestic animals live near people.","গৃহপালিত প্রাণী মানুষের কাছে থাকে।"],
+["Economic","অর্থনৈতিক","ইকোনমিক","The country faces economic challenges.","দেশটি অর্থনৈতিক চ্যালেঞ্জের মুখোমুখি।"],
+["Educational","শিক্ষামূলক","এডুকেশনাল","This video is educational.","এই ভিডিওটি শিক্ষামূলক।"],
+["Environmental","পরিবেশগত","এনভায়রনমেন্টাল","We face environmental problems.","আমরা পরিবেশগত সমস্যার মুখোমুখি।"],
+["Global","বৈশ্বিক","গ্লোবাল","Climate change is a global issue.","জলবায়ু পরিবর্তন একটি বৈশ্বিক সমস্যা।"],
+["Legal","আইনসম্মত","লিগ্যাল","You should follow legal procedures.","তোমার আইনসম্মত পদ্ধতি অনুসরণ করা উচিত।"],
+["Medical","চিকিৎসাসংক্রান্ত","মেডিক্যাল","He needs medical attention.","তার চিকিৎসাসংক্রান্ত সহায়তা প্রয়োজন।"],
+["Official","সরকারি/আনুষ্ঠানিক","অফিশিয়াল","Wait for the official announcement.","সরকারি ঘোষণার জন্য অপেক্ষা করো।"],
+["Personal","ব্যক্তিগত","পার্সোনাল","This is my personal opinion.","এটি আমার ব্যক্তিগত মতামত।"],
+["Social","সামাজিক","সোশ্যাল","Humans are social beings.","মানুষ সামাজিক জীব।"]
+]
+};
+
+// দিনগুলোর নাম (Ordinal suffixes) ঠিক করার ফাংশন
+function getDayName(num) {
+    if (num === 1) return "1st Day";
+    if (num === 2) return "2nd Day";
+    if (num === 3) return "3rd Day";
+    if (num === 21) return "21st Day";
+    if (num === 22) return "22nd Day";
+    if (num === 23) return "23rd Day";
+    return num + "th Day";
+}
+
+// হোম পেজে কার্ডগুলো ডাইনামিকালি রেন্ডার করা এবং টিক বাটন হ্যান্ডেল করা
+function renderDays() {
+    const container = document.getElementById("daysGridContainer");
+    container.innerHTML = "";
+
+    for (let i = 1; i <= 30; i++) {
+        const isCompleted = localStorage.getItem("day_" + i) === "true";
+        const dayString = getDayName(i);
+
+        const card = document.createElement("div");
+        card.className = `day-card ${isCompleted ? "completed" : ""}`;
+        card.id = `dayCard-${i}`;
+
+        card.innerHTML = `
+            <button class="day-btn" onclick="showDay(${i})">${dayString}</button>
+            <div class="card-bottom">
+                <button class="tick-btn" id="tickBtn-${i}" onclick="toggleComplete(event, ${i})">${isCompleted ? '✓ Done' : 'Mark Done'}</button>
+            </div>
+        `;
+
+        container.appendChild(card);
+    }
+}
+
+// টিক বাটনে ক্লিক করলে কমপ্লিট স্ট্যাটাস বদলানো
+function toggleComplete(event, day) {
+    event.stopPropagation(); // যাতে কার্ডে ক্লিক হয়ে ভোকেব্যুলারি পেজে না চলে যায়
+    const key = "day_" + day;
+    const currentState = localStorage.getItem(key) === "true";
+    const newState = !currentState;
+
+    localStorage.setItem(key, newState);
+
+    const card = document.getElementById(`dayCard-${day}`);
+    const tickBtn = document.getElementById(`tickBtn-${day}`);
+
+    if (newState) {
+        card.classList.add("completed");
+        tickBtn.innerText = "✓ Done";
+    } else {
+        card.classList.remove("completed");
+        tickBtn.innerText = "Mark Done";
+    }
+}
+
+/* Show Day */
+function showDay(day){
+    document.getElementById("homePage").style.display="none";
+    document.getElementById("vocabPage").style.display="block";
+
+    document.getElementById("dayNumber").innerText = "Day " + day;
+
+    const body = document.getElementById("vocabBody");
+    body.innerHTML="";
+
+    if(!vocabulary[day]){
+        body.innerHTML=`
+            <tr>
+                <td colspan="6">
+                    <div class="empty">
+                        <h2>Day ${day}</h2>
+                        <p>এই দিনের Vocabulary এখনো যোগ করা হয়নি।</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    vocabulary[day].forEach((item,index)=>{
+        const row=document.createElement("tr");
+        row.innerHTML=`
+            <td class="number">${index+1}</td>
+            <td class="word">${item[0]}</td>
+            <td class="meaning">${item[1]}</td>
+            <td class="pronunciation">${item.length > 2 ? item[2] : ''}</td>
+            <td class="example">${item.length > 3 ? item[3] : ''}</td>
+            <td class="example-bn">${item.length > 4 ? item[4] : ''}</td>
+        `;
+        body.appendChild(row);
+    });
+
+    window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+
+function openGuideline() {
+    alert("Vocabulary Guideline");
+}
+
+// পেজ লোড হলে রান হবে
+window.onload = function() {
+    renderDays();
+};
+
+</script>
+
+</body>
+</html>
